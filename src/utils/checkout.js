@@ -53,9 +53,21 @@ const convertIntoCurrency = (price) => {
     });
 }
 
+const updateBasketItems = (basket, item, add) => {
+    const newBasket = [...basket];
+
+    if(add) {
+        newBasket.push(item);
+    } else {
+        newBasket.splice(newBasket.indexOf(item), 1)
+    }
+    return newBasket;
+}
+
 module.exports = {
     calculateLineItemsTotal,
     calculatePriceInPounds,
     formatBasket,
-    convertIntoCurrency
+    convertIntoCurrency,
+    updateBasketItems
 }

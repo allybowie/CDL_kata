@@ -68,5 +68,10 @@
             "sku": "C",
             "pricePerUnitPence": 20
         }
-    ]
+    ],
+    "addedItem": {
+        "name": "C",
+        "sku": "C",
+        "pricePerUnitPence": 20
+    }
 }

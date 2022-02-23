@@ -1,4 +1,4 @@
-const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket, convertIntoCurrency } = require("../src/utils/checkout.js");
+const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket, convertIntoCurrency, updateBasketItems } = require("../src/utils/checkout.js");
 const testData = require("./testData/testData.json");
 const itemData = require("../src/data/products.json");
 
@@ -84,4 +84,24 @@ describe("Converts a number into currency (GBP)", () => {
         expect(convertIntoCurrency(1.55)).toBe("£1.55");
         expect(convertIntoCurrency(1.80)).toBe("£1.80");
     })
+})
+
+describe("Adds and removes items from the basket", () => {
+    const testBasketData = testData.formatBasket;
+    const newItem = testData.addedItem
+    test("Adds an item to a basket array", () => {
+        const updatedBasketWithItem = updateBasketItems(testBasketData, newItem, true);
+        expect(updatedBasketWithItem.length === 9).toBe(true);
+
+        const filteredItems = updatedBasketWithItem.filter(item => item.sku === "C")
+
+        expect(filteredItems.length === 2).toBe(true);
+    });
+
+    test("Removes an item to a basket array", () => {
+        const itemRemoved = updateBasketItems(testBasketData, newItem, false);
+        expect(itemRemoved.length === 7).toBe(true);
+        const filteredItems = itemRemoved.filter(item => item.sku === "C")
+        expect(filteredItems.length === 0).toBe(true);
+    });
 })

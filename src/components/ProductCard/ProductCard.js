@@ -18,8 +18,8 @@ const ProductCard = (props) => {
         <p>Price: {convertIntoCurrency(calculatePriceInPounds(props.item.pricePerUnitPence))}</p>
         {renderOffer()}
         <div className="buttonContainer">
-            <div className="add"></div>
-            <div className="remove"></div>
+            <div className="add" onClick={props.clickAction(true)}></div>
+            <div className="remove" onClick={props.clickAction(false)}></div>
         </div>
     </div>
 }
