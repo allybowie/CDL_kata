@@ -64,10 +64,24 @@ const updateBasketItems = (basket, item, add) => {
     return newBasket;
 }
 
+const getBasketTotal = (basket) => {
+    let basketArray = [];
+
+    for(let key in basket) {
+        basketArray.push(basket[key]);
+    }
+    const total = basketArray.reduce((basketTotal, item) => {
+        basketTotal += item.totalCost;
+        return basketTotal;
+    }, 0)
+    return convertIntoCurrency(total).toString();
+}
+
 module.exports = {
     calculateLineItemsTotal,
     calculatePriceInPounds,
     formatBasket,
     convertIntoCurrency,
-    updateBasketItems
+    updateBasketItems,
+    getBasketTotal
 }

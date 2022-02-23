@@ -1,4 +1,11 @@
-const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket, convertIntoCurrency, updateBasketItems } = require("../src/utils/checkout.js");
+const {
+    calculateLineItemsTotal,
+    calculatePriceInPounds,
+    formatBasket,
+    convertIntoCurrency,
+    updateBasketItems,
+    getBasketTotal
+} = require("../src/utils/checkout.js");
 const testData = require("./testData/testData.json");
 const itemData = require("../src/data/products.json");
 
@@ -103,5 +110,21 @@ describe("Adds and removes items from the basket", () => {
         expect(itemRemoved.length === 7).toBe(true);
         const filteredItems = itemRemoved.filter(item => item.sku === "C")
         expect(filteredItems.length === 0).toBe(true);
+    });
+})
+
+describe("Retrieve the total cost of the entire basket, including offers", () => {
+    const testBasketData = testData.formatBasket;
+
+    test("Returns a string", () => {
+        expect(typeof getBasketTotal(formatBasket(testBasketData)) === "string").toBe(true);
+    });
+
+    test("Returns a the correct price as a string", () => {
+        expect(getBasketTotal(formatBasket(testBasketData)).includes("2.75")).toBe(true);
+    });
+
+    test("Returns a the correct price as a currency string", () => {
+        expect(getBasketTotal(formatBasket(testBasketData))).toBe("£2.75");
     });
 })
