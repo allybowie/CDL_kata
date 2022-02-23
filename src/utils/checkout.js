@@ -28,7 +28,26 @@ const calculatePriceInPounds = (priceInPence) => {
     return parseFloat(pounds + "." + pence);
 }
 
+const formatBasket = (basket) => {
+    const reducedBasket = basket.reduce((newBasketObject, item) => {
+        if(!newBasketObject[item.sku]) {
+            newBasketObject[item.sku] = item;
+            newBasketObject[item.sku].totalItems = 1;
+            newBasketObject[item.sku].subTotalCost = calculatePriceInPounds(item.pricePerUnitPence);
+            newBasketObject[item.sku].totalCost = calculatePriceInPounds(item.pricePerUnitPence);
+        } else {
+            newBasketObject[item.sku].totalItems = newBasketObject[item.sku].totalItems + 1;
+            newBasketObject[item.sku].subTotalCost = calculatePriceInPounds(item.pricePerUnitPence * newBasketObject[item.sku].totalItems);
+            newBasketObject[item.sku].totalCost = calculatePriceInPounds(calculateLineItemsTotal(newBasketObject[item.sku].totalItems, item));
+        }
+
+        return newBasketObject;
+    }, {})
+    return  reducedBasket
+}
+
 module.exports = {
     calculateLineItemsTotal,
-    calculatePriceInPounds
+    calculatePriceInPounds,
+    formatBasket
 }

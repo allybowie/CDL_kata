@@ -1,5 +1,5 @@
-const { calculateLineItemsTotal, calculatePriceInPounds } = require("../src/utils/checkout.js");
-
+const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket } = require("../src/utils/checkout.js");
+const testData = require("./testData/testData.json");
 const itemData = require("../src/data/products.json");
 
 describe("Calculate Line Items Price - Method to calculate the correct total for each line item", () => {
@@ -46,5 +46,34 @@ describe("Calculate Price in pounds (Decimals)", () => {
         expect(calculatePriceInPounds(137)).toBe(1.37);
         expect(calculatePriceInPounds(linePriceItemB)).toBe(1.2);
         expect(calculatePriceInPounds(linePriceItemBTwo)).toBe(0.45);
+    });
+});
+
+describe("Formats the basket to give a single entry for each different line item, with a total amount, subtotal cost and total cost (depending on offers)", () => {
+    const testBasketData = testData.formatBasket;
+    test("It returns an object", () => {
+        expect(typeof formatBasket(testBasketData) === "object").toBe(true);
+    });
+
+    test("It returns an object with 3 keys", () => {
+        expect(Object.entries(formatBasket(testBasketData)).length).toBe(3);
+    });
+
+    test("It returns an object with 3 entries, each with a 'totalItems' key", () => {
+        expect(formatBasket(testBasketData).C.totalItems).toBe(1);
+        expect(formatBasket(testBasketData).A.totalItems).toBe(4);
+        expect(formatBasket(testBasketData).B.totalItems).toBe(3);
+    });
+
+    test("It returns an object with 3 entries, each with a 'subTotalCost' key which shows the value before applying offers in pounds", () => {
+        expect(formatBasket(testBasketData).C.subTotalCost).toBe(0.20);
+        expect(formatBasket(testBasketData).A.subTotalCost).toBe(2.00);
+        expect(formatBasket(testBasketData).B.subTotalCost).toBe(0.90);
+    });
+
+    test("It returns an object with 3 entries, each with a 'totalCost' key which shows the value after applying offers in pounds", () => {
+        expect(formatBasket(testBasketData).C.totalCost).toBe(0.20);
+        expect(formatBasket(testBasketData).A.totalCost).toBe(1.80);
+        expect(formatBasket(testBasketData).B.totalCost).toBe(0.75);
     });
 })
