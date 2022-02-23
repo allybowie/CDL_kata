@@ -12,8 +12,23 @@ const calculateLineItemsTotal = (amount, item) => {
     const remainderPrice = remainder * item.pricePerUnitPence;
     
     return offerTotal + remainderPrice;
+};
+
+const calculatePriceInPounds = (priceInPence) => {
+    if(priceInPence < 10) {
+        return parseFloat(`.0${priceInPence}`); 
+    } else if (priceInPence < 100) {
+        return parseFloat("." + priceInPence);
+    }
+
+    const penceArray = priceInPence.toString().split("");
+    const pence = [...penceArray].slice(penceArray.length - 2).join("");
+    const pounds = [...penceArray].slice(0, penceArray.length - 2).join("");
+
+    return parseFloat(pounds + "." + pence);
 }
 
 module.exports = {
-    calculateLineItemsTotal
+    calculateLineItemsTotal,
+    calculatePriceInPounds
 }
