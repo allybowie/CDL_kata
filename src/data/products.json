@@ -1,0 +1,30 @@
+[
+    {
+        "name": "A",
+        "sku": "A",
+        "pricePerUnitPence": 50,
+        "specialPrice": {
+            "units": 3,
+            "priceInPence": 130
+        }
+    },
+    {
+        "name": "B",
+        "sku": "B",
+        "pricePerUnitPence": 30,
+        "specialPrice": {
+            "units": 2,
+            "priceInPence": 45
+        }
+    },
+    {
+        "name": "C",
+        "sku": "C",
+        "pricePerUnitPence": 20
+    },
+    {
+        "name": "D",
+        "sku": "D",
+        "pricePerUnitPence": 15
+    }
+]
