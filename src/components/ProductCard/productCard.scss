@@ -7,3 +7,57 @@
         margin-bottom: 15px;
     }
 }
+
+.buttonContainer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 100%;
+    width: 30px;
+}
+
+.add {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 15px;
+
+    &::before {
+        content: "";
+        width: 3px;
+        height: 15px;
+        position: absolute;
+        top: 0;
+        right: 6px;
+        background-color: black;
+    }
+
+    &::after {
+        content: "";
+        width: 15px;
+        height: 3px;
+        position: absolute;
+        top: 6px;
+        right: 0;
+        background-color: black;
+    }
+}
+
+.remove {
+    position: absolute;
+    bottom: 21px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+
+    &::before {
+        content: "";
+        width: 15px;
+        height: 3px;
+        position: absolute;
+        bottom: 7px;
+        right: 0;
+        background-color: black;
+    }
+}

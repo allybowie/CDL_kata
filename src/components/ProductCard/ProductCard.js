@@ -17,6 +17,10 @@ const ProductCard = (props) => {
         <p>{props.item.name}</p>
         <p>Price: {convertIntoCurrency(calculatePriceInPounds(props.item.pricePerUnitPence))}</p>
         {renderOffer()}
+        <div className="buttonContainer">
+            <div className="add"></div>
+            <div className="remove"></div>
+        </div>
     </div>
 }
 
