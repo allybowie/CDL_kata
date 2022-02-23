@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  position: relative;
+  margin: 0 15px;
 }
 
 .App-logo {
@@ -40,4 +42,11 @@
 .lineItemsContainer {
   max-width: 400px;
   margin: 0 auto;
+}
+
+.basketContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
 }
