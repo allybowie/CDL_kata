@@ -13,13 +13,17 @@ const ProductCard = (props) => {
         </div>
     }
 
+    const updateParent = (plus) => {
+        props.clickAction(props.item, plus)
+    }
+
     return <div className="productCardContainer">
         <p>{props.item.name}</p>
         <p>Price: {convertIntoCurrency(calculatePriceInPounds(props.item.pricePerUnitPence))}</p>
         {renderOffer()}
         <div className="buttonContainer">
-            <div className="add" onClick={props.clickAction(true)}></div>
-            <div className="remove" onClick={props.clickAction(false)}></div>
+            <div className="add" onClick={() => updateParent(true)}></div>
+            <div className="remove" onClick={() => updateParent(false)}></div>
         </div>
     </div>
 }

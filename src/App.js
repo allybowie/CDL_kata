@@ -2,20 +2,15 @@ import logo from './logo.svg';
 import './App.css';
 import ProductCard from './components/ProductCard/ProductCard.js';
 import productData from "./data/products.json";
+import { updateBasketItems } from "../src/utils/checkout.js";
 import React, { useState } from 'react';
 
 function App() {
 
   const [basket, setBasketItems] = useState([]);
 
-  const updateBasketItems = (product, plus) => {
-    const newBasket = [...basket];
-
-    if(plus) {
-      newBasket.push(product);
-    } else {
-      newBasket.splice(newBasket.indexOf(product), 1)
-    }
+  const updateBasketItemsInState = (product, plus) => {
+    const newBasket = updateBasketItems([...basket], product, plus);
 
     setBasketItems(newBasket);
 
@@ -24,7 +19,7 @@ function App() {
 
   const renderLineItems = () => {
     return productData.map((product, index) => {
-      return <ProductCard key={'product-card-' + index} item={product} clickAction=""/>
+      return <ProductCard key={'product-card-' + index} item={product} clickAction={updateBasketItemsInState}/>
     })
   }
 
