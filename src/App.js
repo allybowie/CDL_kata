@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import ProductCard from './components/ProductCard/ProductCard.js';
+import productData from "./data/products.json";
 
 function App() {
+  const renderLineItems = () => {
+    return productData.map((product, index) => {
+      return <ProductCard key={'product-card-' + index} item={product}/>
+    })
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="lineItemsContainer">
+        <h1>Products:</h1>
+        {renderLineItems()}
+      </div>
     </div>
   );
 }

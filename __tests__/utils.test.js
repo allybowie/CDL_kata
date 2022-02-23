@@ -1,4 +1,4 @@
-const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket } = require("../src/utils/checkout.js");
+const { calculateLineItemsTotal, calculatePriceInPounds, formatBasket, convertIntoCurrency } = require("../src/utils/checkout.js");
 const testData = require("./testData/testData.json");
 const itemData = require("../src/data/products.json");
 
@@ -76,4 +76,12 @@ describe("Formats the basket to give a single entry for each different line item
         expect(formatBasket(testBasketData).A.totalCost).toBe(1.80);
         expect(formatBasket(testBasketData).B.totalCost).toBe(0.75);
     });
+});
+
+describe("Converts a number into currency (GBP)", () => {
+    test("converts a number into GBP", () => {
+        expect(convertIntoCurrency(0.3)).toBe("£0.30");
+        expect(convertIntoCurrency(1.55)).toBe("£1.55");
+        expect(convertIntoCurrency(1.80)).toBe("£1.80");
+    })
 })

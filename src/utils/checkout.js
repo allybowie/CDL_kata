@@ -46,8 +46,16 @@ const formatBasket = (basket) => {
     return  reducedBasket
 }
 
+const convertIntoCurrency = (price) => {
+    return price.toLocaleString("en-US", {
+        style: "currency",
+        currency: "GBP"
+    });
+}
+
 module.exports = {
     calculateLineItemsTotal,
     calculatePriceInPounds,
-    formatBasket
+    formatBasket,
+    convertIntoCurrency
 }
