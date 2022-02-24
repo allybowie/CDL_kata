@@ -2,7 +2,7 @@
 
 ## A checkout system created using Javascript, tested using Jest and with the user interface built using React.
 
-#### All the data is local and the functionality to add and remove items to the basket has been shown. The React app is also responsive so that content on mobile is also easily visible
+#### All the data is local and the functionality to add and remove items to the basket has been included. The React app is also responsive so that content is also easily visible on mobile devices.
 
 ## To Start
 #### npm i
